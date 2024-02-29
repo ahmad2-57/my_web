@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Interaction</title>
+</head>
+<body>
+
+<h1>توليد نص باستخدام الذكاء الاصطناعي</h1>
+
+<textarea id="inputText" rows="4" cols="50" placeholder="أدخل النص هنا..."></textarea><br>
+<button onclick="generateText()">توليد النص</button><br><br>
+
+<div id="outputText"></div>
+
+<script>
+    function generateText() {
+        var inputText = document.getElementById("inputText").value;
+        var apiKey = "AIzaSyD7wiQi1KEerVDADHP8q-_0PgfiKpJw0vc"
+
+        var apiUrl = "https://api.generativeai.dev/v1/models/gemini-pro:generate";
+
+        fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': apiKey
+            },
+            body: JSON.stringify({
+                "prompt": "Humanize the following arabic text and keep the output in arabic : " + inputText,
+                "generationConfig": {
+                    "temperature": 0.9,
+                    "top_k": 40,
+                    "top_p": 0.95,
+                    "max_output_tokens": 2048
+                },
+                "safetySettings": [
+                    {"category": "HARM_CATEGORY_DANGEROUS", "threshold": "BLOCK_NONE"},
+                    {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
+                    {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
+                    {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
+                    {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}
+                ]
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("outputText").innerText = data.text;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>
+
+</body>
+</html>
