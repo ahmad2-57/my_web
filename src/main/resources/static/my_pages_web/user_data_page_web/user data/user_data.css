@@ -1,0 +1,126 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #7ec2fc; /* تغيير لون الشاشة إلى اللون الأزرق */
+}
+
+h1 {
+    text-align: center;
+    margin-top: 50px;
+    color: #333;
+}
+
+#user-info {
+    background-color: #fff;
+    width: 30%; /* تقليل عرض المربع الكبير */
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-right: 350px; /* تحريك المربع إلى اليمين بقيمة معينة */
+    line-height: 2.9; /* تحديد تباعد بين الأسطر */
+}
+
+
+
+#user-info p {
+    margin: 10px 0;
+}
+
+#user-info p strong {
+    font-weight: bold;
+}
+
+#user-info span {
+    font-weight: normal;
+    color: #666;
+}
+
+/* CSS للشعار */
+.logo {
+    width: 150px; /* تعديل حجم الشعار حسب الحاجة */
+    height: auto;
+    display: block;
+    float: left; /* جعل الشعار يظهر على اليسار */
+    margin-left: 50px;
+
+}
+
+
+/* CSS للزر العائم */
+.btn-change {
+    background-color: #007bff; /* لون الخلفية للزر */
+    color: #fff; /* لون النص في الزر */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: -535px auto; /* تحريك الزر إلى الأعلى بمقدار 20px */
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-right: 365px; /* تحريك المربع إلى اليمين بقيمة معينة */
+
+}
+.btn-delete {
+    background-color: #dc3545; /* لون الخلفية للزر */
+    color: #fff; /* لون النص في الزر */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    width: 200px; /* تحديد عرض الزر */
+    margin: 20px auto 10px auto; /* توسيط الزر في الصفحة وإضافة تباعد بين العناصر */
+    position: relative; /* تحديد موقع نسبي للزر */
+    top: -430px; /* تحريك الزر نحو الأعلى بمقدار 200 بكسل */
+    right: -940px; /* تحريك الزر إلى اليمين بمقدار 50 بكسل */
+}
+
+
+
+.btn-delete:hover {
+    background-color: #c82333; /* تغيير لون الخلفية عند تحويم المؤشر فوق الزر */
+}
+
+.btn-back{
+    background-color: #007bff; /* لون الخلفية للزر */
+    color: #fff; /* لون النص في الزر */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 185px;
+    margin-left: 80px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+
+.btn-back:hover, .btn-change:hover {
+    background-color: #0056b3; /* تغيير لون الخلفية عند تحويم المؤشر فوق الزر */
+}
+
+/* تخصيص الرأس */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.user_photo{
+    width: 100px; /* تعديل حجم الشعار حسب الحاجة */
+    float: left; /* جعل الصورة تظهر على اليمين */
+    margin-left: 386px; /* تحريك الصورة إلى اليمين بمقدار بسيط */
+    margin-top: 25px;
+    border-radius: 50%; /* جعل الصورة دائرية */
+
+}

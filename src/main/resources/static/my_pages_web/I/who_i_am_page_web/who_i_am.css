@@ -70,7 +70,7 @@ img.profile-pic {
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s;
-    float: right; /* يضع الزر على اليمين */
+    float: left; /* يضع الزر على اليمين */
 }
 
 .back-btn:hover {

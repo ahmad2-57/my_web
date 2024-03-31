@@ -1,4 +1,4 @@
-
+//userServices
 
 package com.example.firstWebApp.services;
 
@@ -28,20 +28,34 @@ public class userServices {
         return repository.findById(id);
     }
 
-  /* public user updateUserInfo(user u,Long id)
-    {
-        Optional<user> u1 = repository.findById(id);
-        u1.get().setPassword(u.getPassword());
-        u1.get().setName(u.getName());
-        u1.get().setEmail(u.getEmail());
-        u1.get().setPhoneNumber(u.getPhoneNumber());
-        return repository.save(u1);
+    public void deleteUserById(Long id) {
+        repository.deleteById(id);
     }
-    */
 
-    public user updateUserInfo(user u,Long id)
+
+    public user updateUserPassword(user user, String newPassword) {
+    user.setPassword(newPassword);
+    return repository.save(user);
+}
+
+    public Optional<user> findUserIdByEmail(String email)
     {
-        user u1=new user(id,u.getName(), u.getEmail(),u.getPassword(),u.getPhoneNumber() , u.getCont_use());
-        return repository.save(u1);
+        return this.repository.findUserIdByEmail(email);
     }
+
+    public boolean authenticate(String email, String password) {
+        Optional<user> optionalUser = this.repository.findByEmailAndPassword(email,password);
+        if (optionalUser.isPresent()) {
+            user user = optionalUser.get();
+            // التحقق مما إذا كانت كلمة المرور متطابقة
+            return user.getPassword().equals(password);
+        }
+        return false;
+    }
+//    public Optional<user> findUserById(Long id) {
+//        return userRepository.findById(id);
+//    }
+
+
+
 }

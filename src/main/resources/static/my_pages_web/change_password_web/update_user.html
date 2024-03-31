@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="update_user_j.js"></script>
+    <title>تغيير كلمة المرور</title>
+    <style>
+        body {
+            background-color: #0c5703; /* تعديل لون الخلفية الرئيسي */
+            background-image: radial-gradient(circle at 20% 50%, #6495ED, transparent 60%), radial-gradient(circle at 80% 50%, #6495ED, transparent 60%);
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 300px;
+            margin: 50px auto;
+            text-align: center;
+            padding: 20px;
+            background-color: #FFF;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(1, 1, 1, 0.1); /* إضافة ظل للمربع */
+        }
+
+        form {
+            display: grid;
+            gap: 15px;
+        }
+
+        label {
+            display: block;
+            text-align: right;
+            color: #333;
+            margin-bottom: 7px;
+        }
+
+        input, select {
+            width: calc(100% - 10px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #35822c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+             background-color: #0c5703; /* اللون الجديد عند التحريك بالمؤشر */
+        }
+
+        /* تغيير لون الرابط عند التحريك بالمؤشر وتحديثه بسلاسة */
+        a {
+            color: blue; /* لون افتراضي */
+            transition: color 0.3s ease; /* تطبيق تأثير التحول بسلاسة */
+        }
+
+        a:hover {
+            color: red; /* لون عند التحريك بالمؤشر */
+        }
+
+        /* تحديد موقع الرابط على اليمين */
+        .container a {
+            text-align: right;
+            display: block; /* يجعل الرابط يمتد ليأخذ كل المساحة المتاحة في العرض */
+            text-decoration: none;
+        }
+
+        img {
+            margin-top: -10px; /* رفع الصورة بمقدار 10 بكسل لتكون موجودة أعلى الصفحة */
+            position: fixed; /* تثبيت الصورة في الزاوية اليسرى العلوية */
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<h2>تغيير كلمة المرور</h2>
+<div class="container">
+    <form id="change_password_form" action="/users/changePassword/{id}" method="PUT">
+        <div>
+            <label for="email">البريد الإلكتروني:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="phoneNumber">رقم الهاتف:</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" required>
+        </div>
+        <div>
+            <label for="password">كلمة المرور الجديدة:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div>
+            <input type="hidden" id="user_id" name="user_id" value=""> <!-- استبدل القيمة 1 بمعرف المستخدم الفعلي -->
+        </div>
+        <div>
+            <button type="submit">تغيير كلمة المرور</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

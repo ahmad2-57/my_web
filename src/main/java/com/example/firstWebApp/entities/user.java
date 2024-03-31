@@ -15,12 +15,34 @@ public class user implements Serializable {
 
     private String name;
 
+    @Column(unique = true, name = "email", nullable=false)
     private String email;
 
     private String password;
 
     private String phoneNumber;
-    private int cont_use;
+
+    private boolean admen;
+
+    private String text_H;
+
+
+
+    public String getText_H() {
+        return text_H;
+    }
+
+    public void setText_H(String text_H) {
+        this.text_H = text_H;
+    }
+
+    public boolean isAdmen() {
+        return admen;
+    }
+
+    public void setAdmen(boolean admen) {
+        this.admen = admen;
+    }
 
     public user() {
 
@@ -62,34 +84,20 @@ public class user implements Serializable {
         return phoneNumber;
     }
 
-    public int getCont_use() {
-        return cont_use;
-    }
-
-    public void setCont_use(int cont_use) {
-        this.cont_use = cont_use;
-    }
-
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public user(Long id, String name, String email, String password, String phoneNumber) {
+    public user(Long id, String name, String email, String password, String phoneNumber ,boolean admen) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
-        this.cont_use=0;
+        this.text_H="";
     }
 
-    public user(Long id, String name, String email, String password, String phoneNumber, int cont_use) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.phoneNumber = phoneNumber;
-        this.cont_use = cont_use;
-    }
+
+
 }
 

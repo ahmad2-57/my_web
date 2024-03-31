@@ -31,7 +31,8 @@ body {
     background-image: url('logo.png'); /* خلفية اللوجو */
     background-size: contain;
     background-repeat: no-repeat;
-    z-index: 999; /* قيمة عالية لجعل اللوجو فوق كل شيء */
+
+    border-radius: 20px;
 }
 
 
@@ -67,7 +68,7 @@ h1 {
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s;
-    float: right; /* يضع الزر على اليمين */
+    float: left; /* يضع الزر على اليمين */
 }
 
 .back-btn:hover {

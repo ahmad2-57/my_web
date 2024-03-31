@@ -1,154 +1,58 @@
 $(document).ready(function () {
     // Fetch data using AJAX
 
-    function addRow(user) {
-        $("#usersList").append("<tr><td>" + user.id + "</td>" +
-            "<td>" + user.name + "</td>" +
-            "<td>" + user.email + "</td>" +
-            "<td>" + user.password + "</td>" +
-            "<td>" + user.phoneNumber + "</td>" +
-            "<td>" + user.cont_use + "</td>" +
-            "<td>" +
-            "<button onclick='findUserById(" + user.id + ")'>" + "Profile" + "</button>" +
-            "</td>" +
-            "</tr>");
-    }
+$.ajax({
+    type: "GET",
+    url: "/users/getAll",
+    success: function(users) {
+        // Iterate through the users and display them in the table
+        users.forEach(function(user) {
+            // إنشاء صف جديد
+            var $row = $("<tr>").append(
+                $("<td>").text(user.id),
+                $("<td>").text(user.name),
+                $("<td>").text(user.email),
+                $("<td>").text(user.password),
+                $("<td>").text(user.phoneNumber),
+                $("<td>").append(
+                $("<button>").text("Profile").click(function() { findUserById(user.id); }),
+                $("<button>").text("Delete").click(function() { deleteUserById(user.id); })
+                )
+            );
 
-    $.ajax({
-        type: "GET",
-        url: "/users/getAll",
-        success: function (users) {
-            // Iterate through the products and display them in the table
-            const usersList = $("#usersList");
-            users.forEach(function (user) {
-                usersList.append("<tr>" +
-                    "<td>" + user.id + "</td>" +
-                    "<td>" + user.name + "</td>" +
-                    "<td>" + user.email + "</td>" +
-                    "<td>" + user.password + "</td>" +
-                    "<td>" + user.phoneNumber + "</td>" +
-                    "<td>" + user.cont_use + "</td>" +
-                    "<td>" +
-                    "<button onclick='findUserById(" + user.id + ")'>" + "Profile" + "</button>" +
-                    "</td>" +
-                    "</tr>");
-            });
-        },
-        error: function (error) {
-            console.error("Error fetching product data: ", error);
-        }
+            // إضافة الصف إلى الجدول
+            $("#usersList").append($row);
+        });
+    },
+    error: function(error) {
+        console.error("Error fetching user data: ", error);
+    }
+});
+
+    $.get("/users/currentUser", function (user) {
+        $("#email").text(user.email);
+        $("#phone").text(user.phoneNumber);
     });
 
-    $("#userForm").submit(function (event) {
+    $("#long_in_form").submit(function (event) {
         event.preventDefault();
-        let user = {
-            name: $("#name").val(), // تصحيح الخطأ هنا
+        let userData = {
             email: $("#email").val(),
-            password: $("#password").val(), // تصحيح الخطأ هنا
-            phoneNumber: $("#phoneNumber").val(),
-            cont_use: $("#cont_use").val()
+            password: $("#password").val()
         };
 
         $.ajax({
             type: "POST",
-            url: "/users/addUser",
+            url: "/login",
             contentType: "application/json",
-            data: JSON.stringify(user),
-            success: function () {
-                alert("تم حفظ المستخدم بنجاح!");
-                addRow(user);
+            data: JSON.stringify(userData),
+            success: function (response) {
+                alert(response);
+                window.location.href = "index.html";
             },
             error: function (error) {
-                console.log("خطأ في حفظ المستخدم: ", error);
+                alert(error.responseText);
             }
         });
     });
-
-    function findUserById(id) {
-        $.ajax({
-            type: "Get",
-            url: "/user/findUserId/" + id,
-            success: function (user) {
-                alert("تم العثور على المستخدم بنجاح. الرقم التعريفي: " + user.id);
-                window.location.href = "/profile.html?id=" + user.id;
-            },
-            error: function (error) {
-                console.log("خطأ في البحث عن المستخدم: ", error);
-            }
-        });
-    }
-
-    async function encryptNumber(number, key) {
-        const encoder = new TextEncoder();
-        const data = encoder.encode(number.toString());
-
-        // Import the key
-        const keyObject = await crypto.subtle.importKey(
-            'raw',
-            encoder.encode(key),
-            { name: 'AES-CBC' },
-            false,
-            ['encrypt', 'decrypt']
-        );
-
-        // Encrypt the data
-        const encryptedData = await crypto.subtle.encrypt(
-            { name: 'AES-CBC', iv: crypto.getRandomValues(new Uint8Array(16)) },
-            keyObject,
-            data
-        );
-
-        // Convert the encrypted buffer to a hexadecimal string
-        const encryptedArray = Array.from(new Uint8Array(encryptedData));
-        const encryptedHex = encryptedArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
-
-        return encryptedHex;
-    }
-
-    async function decryptNumber(encryptedHex, key) {
-        // Import the key
-        const keyObject = await crypto.subtle.importKey(
-            'raw',
-            new TextEncoder().encode(key),
-            { name: 'AES-CBC' },
-            false,
-            ['encrypt', 'decrypt']
-        );
-
-        // Convert the hexadecimal string to a buffer
-        const encryptedArray = encryptedHex.match(/.{1,2}/g).map(byte => parseInt(byte, 16));
-        const encryptedBuffer = new Uint8Array(encryptedArray).buffer;
-
-        // Decrypt the data
-        const decryptedData = await crypto.subtle.decrypt(
-            { name: 'AES-CBC', iv: new Uint8Array(16) },
-            keyObject,
-            encryptedBuffer
-        );
-
-        // Decode the decrypted data
-        const decryptedText = new TextDecoder().decode(decryptedData);
-
-        return decryptedText;
-    }
-    $.ajax({
-        type: "POST",
-url: "https://api.generativeai.dev/v1/models/gemini-pro:generate"
-        headers: {
-            "Authorization": "Bearer AIzaSyD7wiQi1KEerVDADHP8q-_0PgfiKpJw0vc",
-            "Content-Type": "application/json"
-        },
-        data: JSON.stringify({
-            "prompt": x,
-            "max_tokens": 50
-        }),
-        success: function(response) {
-            console.log(response.choices[0].text);
-        },
-
-        error: function(xhr, status, error) {
-            console.error("Error:", error);
-        }
-    });
-
 });

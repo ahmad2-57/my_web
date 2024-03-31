@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
+    <title>Home</title>
     <meta charset="UTF-8">
     <link href="home_page_css.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -12,11 +14,11 @@
 
 <div class="login-box">
     <img src="photos_web/user_photo.png" alt="User Image" class="user-image"> <!-- الصورة الكبيرة -->
-    <a href="sign_up.html">تسجيل دخول</a>
+    <a href="my_pages_web/sign_up_page/sign_up.html">تسجيل دخول</a>
 </div>
 
 <div class="green-rectangle">
-    <a href="my_pages_web/AI_page_web/AI.html">START</a>
+    <a onclick="checkLoginAndRedirect(); return false;">START</a>
 </div>
 
 
@@ -41,8 +43,40 @@
             <li><a href="my_pages_web/want_help/call_me_page_web/call_me.html"> إرسال ملاحظة لي </a></li>
         </ul>
     </li>
-    <li><a href="my_pages_web/user_data_page_web/user_data.html">بيانات المستخدم</a></li>
+    <li><a class="profile-button">عرض الملف الشخصي</a>
+    </li>
 </ul>
+<script>
+function checkLoginAndRedirect() {
+    const userId = localStorage.getItem('user_id'); // استرجاع 'user_id' من localStorage
+    if (userId) {
+        // إذا كان المُعرف موجودًا، إعادة توجيه المستخدم إلى صفحة معينة
+        window.location.href = 'my_pages_web/AI_page_web/ai2.html'; // عدل الرابط حسب صفحتك
+    } else {
+        // إذا لم يكن المُعرف موجودًا، إعادة توجيه المستخدم إلى صفحة تسجيل الدخول
+        window.location.href = 'my_pages_web/long_in_page_web/long_in.html'; // تأكد من صحة الرابط
+    }
+}
+
+function checkAdminAndRedirect() {
+    const admen = localStorage.getItem('admen'); // التحقق مما إذا كان المستخدم مسؤولًا أم لا
+    console.log("af"+admen); // طباعة الرد في وحدة التحكم
+
+    if (admen === 'true') {
+        // إذا كان المستخدم مسؤولًا، إعادة توجيهه إلى الصفحة المناسبة
+        window.location.href = 'my_pages_web/user_data_page_web/adman_v_data/admin_page.html';
+    } else {
+        // إذا لم يكن المستخدم مسؤولًا، إعادة توجيهه إلى الصفحة الأخرى
+        window.location.href = 'my_pages_web/user_data_page_web/user data/user_data.html';
+    }
+}
+
+// استدعاء الدالة عند النقر على الزر
+document.addEventListener('DOMContentLoaded', function() {
+    const profileButton = document.querySelector('.profile-button');
+    profileButton.addEventListener('click', checkAdminAndRedirect);
+});
+</script>
 
 </body>
 </html>

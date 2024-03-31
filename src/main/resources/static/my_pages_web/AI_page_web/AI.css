@@ -1,0 +1,51 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url('qqq.jpg') ; /* Background image */
+        background-size: cover; /* Cover the entire viewport */
+background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent background image from repeating */
+    background-attachment: fixed; /* Keep the background image fixed in the viewport */
+
+}
+
+.box {
+    background-color: #ffffff; /* Background color for the box */
+    border-radius: 10px; /* Border radius */
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Optional: Add a box shadow */
+}
+
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width:30%;
+    margin:0 35%;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#outputText {
+
+    margin-top: 10px;
+    border-radius: 5px;
+}
+.qwe{
+ position: fixed;
+    top: 0;
+    left: 0;}
