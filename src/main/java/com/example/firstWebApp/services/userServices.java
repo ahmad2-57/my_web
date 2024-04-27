@@ -19,6 +19,7 @@ public class userServices {
     {
         return repository.save(u);
     }
+
     public ArrayList<user> getAll() {
         return (ArrayList<user>) repository.findAll();
     }
@@ -55,7 +56,5 @@ public class userServices {
 //    public Optional<user> findUserById(Long id) {
 //        return userRepository.findById(id);
 //    }
-
-
 
 }

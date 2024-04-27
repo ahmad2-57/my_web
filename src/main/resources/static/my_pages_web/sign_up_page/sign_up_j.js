@@ -6,7 +6,7 @@ $("#sign_in_form").submit(function (event) {
             email: $("#email").val(),
             password: $("#password").val(),
             phoneNumber: $("#phoneNumber").val(),
-            admen: true,
+            admen: false,
         };
 
         $.ajax({
@@ -15,14 +15,14 @@ $("#sign_in_form").submit(function (event) {
             contentType: "application/json",
             data: JSON.stringify(user),
             success: function (response) {
+
                 var userId = response.id;
                 var admen = response.admen;
                 console.log(response);
                 localStorage.setItem('userId', userId);
                 localStorage.setItem('admen', admen);
                 alert("تم حفظ المستخدم بنجاح!");
-                addRow(user);
-                window.location.href = "index.html";
+                window.location.href = "../../index.html";
             },
             error: function (error) {
                 console.log("خطأ في حفظ المستخدم: ", error);
